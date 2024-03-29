@@ -613,12 +613,12 @@ namespace WindBot.Game
             // TODO: update equip cards and target cards
             int cardId = packet.ReadInt32();
             int previousControler = GetLocalPlayer(packet.ReadByte());
-            int previousLocation = packet.ReadByte();
+            int previousLocation = packet.ReadUInt16();
             int previousSequence = packet.ReadSByte();
             /*int previousPosotion = */
             packet.ReadSByte();
             int currentControler = GetLocalPlayer(packet.ReadByte());
-            int currentLocation = packet.ReadByte();
+            int currentLocation = packet.ReadUInt16();
             int currentSequence = packet.ReadSByte();
             int currentPosition = packet.ReadSByte();
             packet.ReadInt32(); // reason
@@ -626,7 +626,7 @@ namespace WindBot.Game
             ClientCard card = _duel.GetCard(previousControler, (CardLocation)previousLocation, previousSequence);
             if ((previousLocation & (int)CardLocation.Overlay) != 0)
             {
-                previousLocation = previousLocation & 0x7f;
+                previousLocation = previousLocation & 0x7C7F;
                 card = _duel.GetCard(previousControler, (CardLocation)previousLocation, previousSequence);
                 if (card != null)
                 {
@@ -641,7 +641,7 @@ namespace WindBot.Game
 
             if ((currentLocation & (int)CardLocation.Overlay) != 0)
             {
-                currentLocation = currentLocation & 0x7f;
+                currentLocation = currentLocation & 0x7C7F;
                 card = _duel.GetCard(currentControler, (CardLocation)currentLocation, currentSequence);
                 if (card != null)
                 {
