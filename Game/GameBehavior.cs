@@ -758,7 +758,7 @@ namespace WindBot.Game
         {
             int cardId = packet.ReadInt32();
             int pcc = GetLocalPlayer(packet.ReadByte());
-            int pcl = packet.ReadByte();
+            int pcl = packet.ReadUInt16();
             int pcs = packet.ReadSByte();
             int subs = packet.ReadSByte();
             ClientCard card = _duel.GetCard(pcc, pcl, pcs, subs);
@@ -955,7 +955,7 @@ namespace WindBot.Game
             {
                 packet.ReadInt32(); // card id
                 int con = GetLocalPlayer(packet.ReadByte());
-                CardLocation loc = (CardLocation)packet.ReadByte();
+                CardLocation loc = (CardLocation)packet.ReadUInt16();
                 int seq = packet.ReadByte();
                 int desc = packet.ReadInt32();
 
@@ -1944,7 +1944,7 @@ namespace WindBot.Game
             _ai.CleanSelectMaterials();
             int code = packet.ReadInt32();
             int currentControler = GetLocalPlayer(packet.ReadByte());
-            int currentLocation = packet.ReadByte();
+            int currentLocation = packet.ReadUInt16();
             int currentSequence = packet.ReadSByte();
             int currentPosition = packet.ReadSByte();
             ClientCard card = _duel.GetCard(currentControler, (CardLocation)currentLocation, currentSequence);
@@ -1971,7 +1971,7 @@ namespace WindBot.Game
             {
                 int cardId = packet.ReadInt32();
                 int player = GetLocalPlayer(packet.ReadByte());
-                int loc = packet.ReadByte();
+                int loc = packet.ReadUInt16();
                 int seq = packet.ReadByte();
                 ClientCard card = _duel.GetCard(player, (CardLocation)loc, seq);
                 if (cardId > 0) card.SetId(cardId);
