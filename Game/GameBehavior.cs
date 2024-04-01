@@ -454,7 +454,7 @@ namespace WindBot.Game
             for (int i = 0; i < count; ++i)
             {
                 int player = GetLocalPlayer(packet.ReadByte());
-                int loc = packet.ReadByte();
+                int loc = packet.ReadUInt16();
                 int seq = packet.ReadByte();
                 /*int sseq = */
                 packet.ReadByte();
@@ -466,7 +466,7 @@ namespace WindBot.Game
             for (int i = 0; i < count; ++i)
             {
                 int player = GetLocalPlayer(packet.ReadByte());
-                int loc = packet.ReadByte();
+                int loc = packet.ReadUInt16();
                 int seq = packet.ReadByte();
                 /*int sseq = */
                 packet.ReadByte();
@@ -698,11 +698,11 @@ namespace WindBot.Game
         private void OnAttack(BinaryReader packet)
         {
             int ca = GetLocalPlayer(packet.ReadByte());
-            int la = packet.ReadByte();
+            int la = packet.ReadUInt16();
             int sa = packet.ReadByte();
             packet.ReadByte(); //
             int cd = GetLocalPlayer(packet.ReadByte());
-            int ld = packet.ReadByte();
+            int ld = packet.ReadUInt16();
             int sd = packet.ReadByte();
             packet.ReadByte(); //
 
@@ -825,7 +825,7 @@ namespace WindBot.Game
             {
                 int id = packet.ReadInt32();
                 int controler = GetLocalPlayer(packet.ReadByte());
-                CardLocation loc = (CardLocation)packet.ReadByte();
+                CardLocation loc = (CardLocation)packet.ReadUInt16();
                 int seq = packet.ReadByte();
                 ClientCard card;
                 if (((int)loc & (int)CardLocation.Overlay) != 0)
@@ -930,7 +930,7 @@ namespace WindBot.Game
             for (int i = 0; i < count; ++i)
             {
                 int player = GetLocalPlayer(packet.ReadByte());
-                int loc = packet.ReadByte();
+                int loc = packet.ReadUInt16();
                 int seq = packet.ReadByte();
                 /*int sseq = */
                 packet.ReadByte();
@@ -973,7 +973,7 @@ namespace WindBot.Game
             {
                 packet.ReadInt32(); // card id
                 int con = GetLocalPlayer(packet.ReadByte());
-                CardLocation loc = (CardLocation)packet.ReadByte();
+                CardLocation loc = (CardLocation)packet.ReadUInt16();
                 int seq = packet.ReadByte();
                 int diratt = packet.ReadByte();
 
@@ -1015,7 +1015,7 @@ namespace WindBot.Game
             {
                 int id = packet.ReadInt32();
                 int player = GetLocalPlayer(packet.ReadByte());
-                CardLocation loc = (CardLocation)packet.ReadByte();
+                CardLocation loc = (CardLocation)packet.ReadUInt16();
                 int seq = packet.ReadByte();
                 packet.ReadByte(); // pos
                 ClientCard card;
@@ -1077,7 +1077,7 @@ namespace WindBot.Game
             {
                 int id = packet.ReadInt32();
                 int player = GetLocalPlayer(packet.ReadByte());
-                CardLocation loc = (CardLocation)packet.ReadByte();
+                CardLocation loc = (CardLocation)packet.ReadUInt16();
                 int seq = packet.ReadByte();
                 packet.ReadByte(); // pos
                 ClientCard card;
@@ -1095,7 +1095,7 @@ namespace WindBot.Game
             {
                 int id = packet.ReadInt32();
                 int player = GetLocalPlayer(packet.ReadByte());
-                CardLocation loc = (CardLocation)packet.ReadByte();
+                CardLocation loc = (CardLocation)packet.ReadUInt16();
                 int seq = packet.ReadByte();
                 packet.ReadByte(); // pos
             }
@@ -1158,7 +1158,7 @@ namespace WindBot.Game
                 packet.ReadByte(); // flag
                 int id = packet.ReadInt32();
                 int con = GetLocalPlayer(packet.ReadByte());
-                int loc = packet.ReadByte();
+                int loc = packet.ReadUInt16();
                 int seq = packet.ReadByte();
                 int sseq = packet.ReadByte();
 
@@ -1204,7 +1204,7 @@ namespace WindBot.Game
             {
                 packet.ReadInt32(); // card id
                 int player = GetLocalPlayer(packet.ReadByte());
-                CardLocation loc = (CardLocation)packet.ReadByte();
+                CardLocation loc = (CardLocation)packet.ReadUInt16();
                 int seq = packet.ReadByte();
                 int num = packet.ReadInt16();
                 cards.Add(_duel.GetCard(player, loc, seq));
@@ -1323,7 +1323,7 @@ namespace WindBot.Game
 
             int cardId = packet.ReadInt32();
             int player = GetLocalPlayer(packet.ReadByte());
-            CardLocation loc = (CardLocation)packet.ReadByte();
+            CardLocation loc = (CardLocation)packet.ReadUInt16();
             int seq = packet.ReadByte();
             packet.ReadByte();
             int desc = packet.ReadInt32();
@@ -1364,7 +1364,7 @@ namespace WindBot.Game
                 {
                     packet.ReadInt32(); // card id
                     int con = GetLocalPlayer(packet.ReadByte());
-                    CardLocation loc = (CardLocation)packet.ReadByte();
+                    CardLocation loc = (CardLocation)packet.ReadUInt16();
                     int seq = packet.ReadByte();
                     ClientCard card = _duel.GetCard(con, loc, seq);
                     if (card == null) continue;
@@ -1394,7 +1394,7 @@ namespace WindBot.Game
             {
                 packet.ReadInt32(); // card id
                 int con = GetLocalPlayer(packet.ReadByte());
-                CardLocation loc = (CardLocation)packet.ReadByte();
+                CardLocation loc = (CardLocation)packet.ReadUInt16();
                 int seq = packet.ReadByte();
                 int desc = packet.ReadInt32();
 
@@ -1563,7 +1563,7 @@ namespace WindBot.Game
                 {
                     int cardId = packet.ReadInt32();
                     int player = GetLocalPlayer(packet.ReadByte());
-                    CardLocation loc = (CardLocation)packet.ReadByte();
+                    CardLocation loc = (CardLocation)packet.ReadUInt16();
                     int seq = packet.ReadByte();
                     ClientCard card = _duel.GetCard(player, loc, seq);
                     if (cardId != 0 && card.Id != cardId)
