@@ -871,7 +871,7 @@ namespace WindBot.Game
         private void OnUpdateCard(BinaryReader packet)
         {
             int player = GetLocalPlayer(packet.ReadByte());
-            int loc = packet.ReadByte();
+            int loc = packet.ReadInt16();
             int seq = packet.ReadByte();
 
             packet.ReadInt32(); // ???
@@ -884,7 +884,7 @@ namespace WindBot.Game
         private void OnUpdateData(BinaryReader packet)
         {
             int player = GetLocalPlayer(packet.ReadByte());
-            CardLocation loc = (CardLocation)packet.ReadByte();
+            CardLocation loc = (CardLocation)packet.ReadInt16();
             IList<ClientCard> cards = null;
             switch (loc)
             {
