@@ -58,7 +58,7 @@ namespace WindBot.Game
                 return null;
 
             bool isXyz = (loc & 0x80) != 0;
-            CardLocation location = (CardLocation)(loc & 0x7f);
+            CardLocation location = (CardLocation)(loc & 0xff7f);
 
             IList<ClientCard> cards = null;
             switch (location)
@@ -83,6 +83,24 @@ namespace WindBot.Game
                     break;
                 case CardLocation.Extra:
                     cards = Fields[player].ExtraDeck;
+                    break;
+                case CardLocation.EXILE:
+                    cards = Fields[player].Exile;
+                    break;
+                case CardLocation.ORDER:
+                    cards = Fields[player].Order;
+                    break;
+                case CardLocation.DAMAGE:
+                    cards = Fields[player].Damage;
+                    break;
+                case CardLocation.GZONE:
+                    cards = Fields[player].Gzone;
+                    break;
+                case CardLocation.SPARE:
+                    cards = Fields[player].Spare;
+                    break;
+                case CardLocation.EMBLEM:
+                    cards = Fields[player].Emblem;
                     break;
             }
             if (cards == null)
@@ -138,6 +156,24 @@ namespace WindBot.Game
                 case CardLocation.Extra:
                     Fields[player].ExtraDeck.Add(card);
                     break;
+                case CardLocation.EXILE:
+                    Fields[player].Exile.Add(card);
+                    break;
+                case CardLocation.ORDER:
+                    Fields[player].Order.Add(card);
+                    break;
+                case CardLocation.DAMAGE:
+                    Fields[player].Damage.Add(card);
+                    break;
+                case CardLocation.GZONE:
+                    Fields[player].Gzone.Add(card);
+                    break;
+                case CardLocation.SPARE:
+                    Fields[player].Spare.Add(card);
+                    break;
+                case CardLocation.EMBLEM:
+                    Fields[player].Emblem.Add(card);
+                    break;
             }
         }
 
@@ -165,6 +201,24 @@ namespace WindBot.Game
                     break;
                 case CardLocation.Extra:
                     Fields[player].ExtraDeck.Remove(card);
+                    break;
+                case CardLocation.EXILE:
+                    Fields[player].Exile.Remove(card);
+                    break;
+                case CardLocation.ORDER:
+                    Fields[player].Order.Remove(card);
+                    break;
+                case CardLocation.DAMAGE:
+                    Fields[player].Damage.Remove(card);
+                    break;
+                case CardLocation.GZONE:
+                    Fields[player].Gzone.Remove(card);
+                    break;
+                case CardLocation.SPARE:
+                    Fields[player].Spare.Remove(card);
+                    break;
+                case CardLocation.EMBLEM:
+                    Fields[player].Emblem.Remove(card);
                     break;
             }
         }

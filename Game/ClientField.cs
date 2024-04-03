@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using WindBot.Game.AI;
 using YGOSharp.OCGWrapper.Enums;
 
 namespace WindBot.Game
@@ -14,6 +13,12 @@ namespace WindBot.Game
         public IList<ClientCard> Banished { get; private set; }
         public IList<ClientCard> Deck { get; private set; }
         public IList<ClientCard> ExtraDeck { get; private set; }
+        public IList<ClientCard> Exile { get; private set; }
+        public IList<ClientCard> Order { get; private set; }
+        public IList<ClientCard> Damage { get; private set; }
+        public IList<ClientCard> Spare { get; private set; }
+        public IList<ClientCard> Gzone { get; private set; }
+        public IList<ClientCard> Emblem { get; private set; }
 
         public int LifePoints;
         public ClientCard BattlingMonster;
@@ -32,6 +37,13 @@ namespace WindBot.Game
             Banished = new List<ClientCard>();
             Deck = new List<ClientCard>();
             ExtraDeck = new List<ClientCard>();
+            Exile = new List<ClientCard>();
+            Order = new List<ClientCard>();
+            Damage = new List<ClientCard>();
+            Spare = new List<ClientCard>();
+            Gzone = new List<ClientCard>();
+            Emblem = new List<ClientCard>();
+
 
             for (int i = 0; i < deck; ++i)
                 Deck.Add(new ClientCard(0, CardLocation.Deck, -1));
@@ -85,7 +97,7 @@ namespace WindBot.Game
                 count++;
             if (MonsterZone[zone] != null)
                 count++;
-            if(zone == 1 && IncludeExtraMonsterZone)
+            if (zone == 1 && IncludeExtraMonsterZone)
             {
                 if (MonsterZone[5] != null)
                     count++;
@@ -177,7 +189,7 @@ namespace WindBot.Game
         {
             return HasInCards(Graveyard, cardId);
         }
-    
+
         public bool HasInGraveyard(IList<int> cardId)
         {
             return HasInCards(Graveyard, cardId);
