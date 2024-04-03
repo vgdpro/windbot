@@ -18,24 +18,29 @@ namespace WindBot.Game
             SideCards = new List<NamedCard>();
         }
 
-        private void AddNewCard(int cardId, bool sideDeck)
+        private void AddNewCard(int cardId, int Deck)
         {
             NamedCard newCard = NamedCard.Get(cardId);
             if (newCard == null)
                 return;
 
-            if (!sideDeck)
-                AddCard(newCard);
-            else
-                SideCards.Add(newCard);
+            switch (Deck)
+            {
+                case 0:
+                    AddCard(newCard);
+                    break;
+                case 1:
+                    ExtraCards.Add(newCard);
+                    break;
+                case 2:
+                    SideCards.Add(newCard);
+                    break;
+            }
         }
 
         private void AddCard(NamedCard card)
         {
-            if (card.IsExtraCard())
-                ExtraCards.Add(card);
-            else
-                Cards.Add(card);
+            Cards.Add(card);
         }
 
         public static Deck Load(string name)
@@ -46,7 +51,7 @@ namespace WindBot.Game
                 reader = new StreamReader(Program.ReadFile("Decks", name, "ydk"));
 
                 Deck deck = new Deck();
-                bool side = false;
+                int side = 0;
 
                 while (!reader.EndOfStream)
                 {
@@ -55,11 +60,14 @@ namespace WindBot.Game
                         continue;
 
                     line = line.Trim();
-                    if (line.StartsWith("#"))
+                    if (line.StartsWith("#extra"))
+                    {
+                        side = 1;
                         continue;
+                    }
                     if (line.Equals("!side"))
                     {
-                        side = true;
+                        side = 2;
                         continue;
                     }
 
@@ -74,9 +82,9 @@ namespace WindBot.Game
 
                 if (deck.Cards.Count > 60)
                     return null;
-                if (deck.ExtraCards.Count > 15)
+                if (deck.ExtraCards.Count > 30)
                     return null;
-                if (deck.SideCards.Count > 15)
+                if (deck.SideCards.Count > 30)
                     return null;
 
                 return deck;
